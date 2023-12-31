@@ -35,11 +35,11 @@ effet tabeffet[100];
 date ecriredate(){
    int j,m,a;
    date dd;
-   printf("pour construire la date,taper le nombre de jours\n");
+   printf("pour construire la date sous la forme jj/mm/aa,taper le nombre de jours jj\n");
    scanf("%d",&j);
-   printf("pour construire la date,taper le nombre de mois\n");
+   printf("pour construire la date sous la forme jj/mm/aa,taper le nombre de mois mm\n");
    scanf("%d",&m);
-   printf("pour construire la date,taper le nombre d annee\n");
+   printf("pour construire la date sous la forme jj/mm/aa,taper le nombre d annee aa\n");
    scanf("%d",&a);
    dd.jj=j;
    dd.mm=m;
@@ -68,8 +68,16 @@ int main(){
             scanf("%f",&eff.taux_escompte);
             printf("mainetenant nou passons a taper la date d echeance de cette effet\n");
             eff.date_echea=ecriredate();
-            int  jours1 = date_esc.jj + date_esc.mm *tab_mois[date_esc.mm-1]  + date_esc.a * 365;
-            int jours2 = eff.date_echea.jj + eff.date_echea.mm * tab_mois[date_esc.mm-1] + eff.date_echea.a * 365;
+            int s1=0;
+            int s2=0;
+            for (int i=0;i<date_esc.mm-1;i++){
+                s1+=tab_mois[i];
+            }
+             for (int i=0;i<eff.date_echea.mm-1;i++){
+                s2+=tab_mois[i];
+            }
+            int  jours1 = date_esc.jj + s1  + date_esc.a * 365;
+            int jours2 = eff.date_echea.jj + s2 + eff.date_echea.a * 365;
             eff.njE=jours2 - jours1;
 
             eff.AgjE=(eff.val_nominale*eff.taux_escompte*eff.njE)/36000;
@@ -98,28 +106,28 @@ int main(){
                   scanf("%d",&eff.plac);
             }while(eff.plac!=0 && eff.plac!=1);
             if (eff.plac==0){
-                printf("tapez les commissions de service pour les effets non placés\n");
+                printf("tapez les commissions de service pour les effets non placÃ©s\n");
                 scanf("%f",&com_plac);
 
             }
             else if (eff.plac==1){
-                    printf("tapez les commissions de service pour les effets placés\n");
+                    printf("tapez les commissions de service pour les effets placÃ©s\n");
                     scanf("%f",&com_plac);
 
             }
-            printf("taper 1 si l operation est domiciliée 0 sinon svp\n");
+            printf("taper 1 si l operation est domiciliÃ©e 0 sinon svp\n");
 
 
             do {
                   scanf("%d",&eff.dom);
             }while(eff.dom!=0 && eff.dom!=1);
             if (eff.dom==0){
-                printf("tapez les commissions de service pour les effets non domiciliés\n");
+                printf("tapez les commissions de service pour les effets non domiciliÃ©s\n");
                 scanf("%f",&com_dom);
 
             }
             else if (eff.dom==1){
-                    printf("tapez les commissions de service pour les effets domiciliés\n");
+                    printf("tapez les commissions de service pour les effets domiciliÃ©s\n");
                     scanf("%f",&com_dom);
 
             }
@@ -182,3 +190,4 @@ int main(){
 
 
 }
+
